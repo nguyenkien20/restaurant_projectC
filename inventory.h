@@ -15,10 +15,12 @@ extern item_t items[MAX_ITEM];
 
 typedef enum state_inventory
 {
+    INVEN_STATE_HOME,
     INVEN_STATE_ADD,
     INVEN_STATE_DISPLAY,
     INVEN_STATE_UPDATE,
     INVEN_STATE_REMOVE,
+    INVEN_STATE_EXIT,
 } inventory_state_t;
 
 int inventory_manage();

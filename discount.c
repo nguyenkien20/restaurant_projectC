@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "common.h"
 #include "discount.h"
 void discount_manage(const role_t *pDiscount, int size)

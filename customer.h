@@ -18,10 +18,12 @@ typedef struct Customer
 
 typedef enum state_customer
 {
+    CUSTOMER_STATE_HOME,
     CUSTOMER_STATE_ADD,
     CUSTOMER_STATE_DISPLAY,
     CUSTOMER_STATE_UPDATE,
     CUSTOMER_STATE_REMOVE,
+    CUSTOMER_STATE_EXIT,
 } customer_state_t;
 
 state_t customerPanel(void); // 1

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "admin.h"
 
 state_t adminPanel(void)
@@ -23,7 +24,7 @@ state_t adminPanel(void)
         admin_login();
         printf("Login succesfully!!!\n");
         return STATE_ADMIN_MENU;
-
+        
     case 2:
         admin_create_account();
         return STATE_ADMIN;
@@ -36,44 +37,43 @@ state_t adminPanel(void)
         return STATE_ADMIN;
     }
 }
-state_t admin_menu_panel(void)
+admin_state_t admin_menu_panel(void)
 {
     int choose = 0;
-    printf("--ADMIN MENU PANEL--\n");
-    printf("1. Manage inventory!\n");
-    printf("2. Manage customers!\n");
-    printf("3. Manage discount!\n");
-    printf("4. Change admin credentials!\n");
-    printf("5. Exit admin menu panel\n");
+    printf("\n----ADMIN MENU PANEL----\n");
+    printf("1. Manage inventory!\n");         // ADMIN_STATE_IVENTORY
+    printf("2. Manage customers!\n");         // ADMIN_STATE_CUSTOMER
+    printf("3. Manage discount!\n");          // ADMIN_STATE_DISCOUNT
+    printf("4. Change admin credentials!\n"); // ADMIN_STATE_CHANGE_ACCOUNT
+    printf("5. Exit admin menu panel\n");     // ADMIN_STATE_EXIT
     printf("----------------------\n");
 
     printf("enter 5 to exit admin menu:\n");
-    scanf("%d", &choose);
+    while(scanf("%d", &choose) != 1 || choose < 1 || choose > 5){
+        printf("Please enter again!!\n");
+        while (getchar() != '\n')
+            ;
+    }
     switch (choose)
     {
     case 1:
         // inventory_manage(inventory_manage_admin, INVENTORY_SIZE);
-        
-        break;
-
+        return ADMIN_STATE_IVENTORY;
     case 2:
         // customer_manage(customer_manage_admin, CUSTOMER_SIZE);
-        break;
+        return ADMIN_STATE_CUSTOMER;
 
     case 3:
         // discount_manage(discount_manage_admin, DISCOUNT_SIZE);
-        break;
+        return ADMIN_STATE_DISCOUNT;
 
     case 4:
         admin_change_credentials();
-        break;
-
-    case 5:
-        return STATE_ADMIN;
+        return ADMIN_STATE_CHANGE_ACCOUNT;
 
     default:
-        printf("PLEASE TRY AGAIN!\n");
-        return STATE_ADMIN_MENU;
+        return ADMIN_STATE_EXIT;
+        break;
     }
 }
 void admin_login(void)

@@ -8,10 +8,12 @@ typedef enum state_home
     STATE_ADMIN_MENU,    // 2     // admin_menu_panel
     STATE_CUSTOMER,      // 3     // customer_panel
     STATE_CUSTOMER_MENU, // 4     // customer_menu_panel
-    STATE_EXIT,          // 5     // exit the program
+    STATE_DISCOUNT,      // 5
+    STATE_DISCOUNT_MENU, // 6
+    STATE_EXIT,          // 7     // terminate the program
+
 } state_t;
 
-state_t main_board(void);   
-
+state_t main_board(void);
 
 #endif

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "customer.h"
 
+
 state_t customerPanel(void)
 {
     unsigned int choose1 = 0;

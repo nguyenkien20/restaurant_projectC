@@ -5,9 +5,11 @@
 #include "common.h"
 typedef enum state_discount
 {
+    DISCOUNT_STATE_HOME,
     DISCOUNT_STATE_ADD,
     DISCOUNT_STATE_DISPLAY,
     DISCOUNT_STATE_REMOVE,
+    DISCOUNT_STATE_EXIT,
 } discount_state_t;
 
 typedef struct Discount

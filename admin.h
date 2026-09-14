@@ -8,9 +8,17 @@ typedef struct Admin
     char username[MAX_NAME];
     char password[MAX_NAME];
 } admin_t;
+typedef enum state_admin {
+    ADMIN_STATE_EXIT,
+    ADMIN_STATE_HOME,
+    ADMIN_STATE_IVENTORY,
+    ADMIN_STATE_CUSTOMER,
+    ADMIN_STATE_DISCOUNT,
+    ADMIN_STATE_CHANGE_ACCOUNT,
+} admin_state_t;
 
 state_t adminPanel(void); 
-state_t admin_menu_panel(void);
+admin_state_t admin_menu_panel(void);
 void admin_login(void); 
 void admin_create_account(void);
 void admin_change_credentials(void);

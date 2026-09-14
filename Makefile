@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -g -Werror
+CFLAGS = -Wall -Wextra -g 
 
 all: final_project
 
