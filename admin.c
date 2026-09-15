@@ -3,10 +3,10 @@
 
 state_t adminPanel(void)
 {
-    unsigned int choose1 = 0, choose2 = 0;
+    unsigned int choose1 = 0;
     printf("\n-----------------------------\n");
-    printf("----WELCOME TO ADMIN PANEL!----\n");
-    printf("-----------------------------\n");
+    printf("---WELCOME TO ADMIN PANEL!---\n");
+    printf("-------------------------------\n");
     printf("1.Sign in?\n");
     printf("2.Create a new admin account!\n");
     printf("3.Back to main board\n");
@@ -44,8 +44,8 @@ admin_state_t admin_menu_panel(void)
     printf("1. Manage inventory!\n");         // ADMIN_STATE_IVENTORY
     printf("2. Manage customers!\n");         // ADMIN_STATE_CUSTOMER
     printf("3. Manage discount!\n");          // ADMIN_STATE_DISCOUNT
-    printf("4. Change admin credentials!\n"); // ADMIN_STATE_CHANGE_ACCOUNT
-    printf("5. Exit admin menu panel\n");     // ADMIN_STATE_EXIT
+    printf("4. Change my account security information!\n"); // ADMIN_STATE_CHANGE_ACCOUNT
+    printf("5. Back to login page!!\n");     // ADMIN_STATE_EXIT
     printf("----------------------\n");
 
     printf("enter 5 to exit admin menu:\n");

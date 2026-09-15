@@ -1,10 +1,9 @@
 #ifndef CUSTOMER_H_
 #define CUSTOMER_H_
 
-
 #include "config.h"
 #include "app_state.h"
-#include "common.h" 
+#include "common.h"
 
 typedef struct Customer
 {
@@ -16,7 +15,7 @@ typedef struct Customer
     char table_id[MAX_TABLE];
 } customer_t;
 
-typedef enum state_customer
+typedef enum state_customer // this for customer's management
 {
     CUSTOMER_STATE_HOME,
     CUSTOMER_STATE_ADD,
@@ -25,23 +24,36 @@ typedef enum state_customer
     CUSTOMER_STATE_REMOVE,
     CUSTOMER_STATE_EXIT,
 } customer_state_t;
+/* between two enum definition here,
+member inside must not have the same name */
+typedef enum customer_view // this for customer reserved table
+{
+    CUSTOMER_VIEW_STATE_HOME,
+    DISPLAY_AVALABLE_TABLE,
+    RESERVED_ADD,
+    RESERVED_DISPLAY,
+    RESERVED_UPDATE,
+    RESERVED_REMOVE,
+    CHANGE_ACCOUNT_CUSTOMER,
+    REVERSED_EXIT, 
+} customer_view_state_t;
 
 state_t customerPanel(void); // 1
-state_t customer_menu_panel(void);
+customer_view_state_t customer_menu_panel(void);
 void customer_login(void);
 void customer_create_account(void);
+customer_view_state_t customer_change_credentials(void);
 // CUSTOMER CONTROLLER
-void reserve_table(void);
-void see_my_reservation(void);
-void customer_reserved_update(void);
-void customer_reserved_cancel(void);
-void customer_menu_display(void);
-void view_available_tables(void);
+customer_view_state_t table_available_display();
+customer_view_state_t reserve_table_add(void);
+customer_view_state_t reserve_table_display(void);
+customer_view_state_t reserve_table_update(void);
+customer_view_state_t reserve_table_remove(void);
 // customer manage main function
-void customer_manage(const role_t *pCustomer, int size); ///////////
-int customer_add(void);
-int customer_display(void);
-int customer_remove(void);
+customer_state_t customer_manage();
+customer_state_t customer_add(void);
+customer_state_t customer_display(void);
+customer_state_t customer_remove(void);
+customer_state_t customer_update(void);
 int admin_view_customer_reserved(void);
-
 #endif

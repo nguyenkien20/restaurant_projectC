@@ -23,11 +23,11 @@ typedef enum state_inventory
     INVEN_STATE_EXIT,
 } inventory_state_t;
 
-int inventory_manage();
-int item_display(void);
-int item_add(void);
-int item_update(void);
-int item_remove(void);
+inventory_state_t inventory_manage();
+inventory_state_t item_display(void);
+inventory_state_t item_add(void);
+inventory_state_t item_update(void);
+inventory_state_t item_remove(void);
 int item_current(void);
 
 #endif

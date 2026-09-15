@@ -2,64 +2,61 @@
 #include "inventory.h"
 
 item_t items[MAX_ITEM];
-int main()
-{
-    int i = inventory_manage();
-    return 0;
-}
-int inventory_manage()
+
+inventory_state_t inventory_manage()
 {
     int choose_index = 0;
-    int flag_value = 1;
-    int return_value = 0;
-    while (flag_value) // equal 1 -> loop
+    printf("INVENTORY MANAGEMENT ADMIN'S VIEW\n");
+    printf("ADD NEW ITEM                -> 1\n");
+    printf("DISPLAY ALL ITEM            -> 2\n");
+    printf("REMOVE ITEM                 -> 3\n");
+    printf("UPDATE ITEM                 -> 4\n");
+    printf("EXIT INVENTORY MANAGEMENT   -> 0\n");
+    printf("-------ENTER YOUR CHOICE-------\n");
+    while (scanf("%d", &choose_index) != 1 || choose_index < 0 || choose_index > 4)
     {
-        printf("INVENTORY MANAGEMENT ADMIN'S VIEW\n");
-        printf("ADD NEW ITEM                -> 1\n");
-        printf("DISPLAY ALL ITEM            -> 2\n");
-        printf("DELETE ITEM                 -> 3\n");
-        printf("EXIT INVENTORY MANAGEMENT   -> 0\n");
+        printf("Please enter from 0 to 4!!\n");
         printf("ENTER YOUR CHOICE: \n");
-        while (scanf("%d", &choose_index) != 1 || choose_index < 0 || choose_index > 3)
-        {
-            printf("please enter from 1 to 3!!\n");
-            printf("ENTER YOUR CHOICE: \n");
-            while (getchar() != '\n')
-                ;
-        }
-        switch (choose_index)
-        {
-        case 1:
-            return_value = item_add();
-            return_value ? printf("Add new item succesfully!\n") : printf("Add new item fail!\n");
-            break;
-        case 2:
-            // display all item
-            return_value = item_display();
-            break;
-        case 3:
-            return_value = item_remove();
-            return_value ? printf("Delete item succesfully!\n") : printf("Delete item fail!\n");
-            break;
-        default:
-            printf("exit!\n");
-            flag_value = 0;
-            break;
-        }
+        while (getchar() != '\n')
+            ;
+    }
+    switch (choose_index)
+    {
+    case 1:
+        printf("1. Add item !!!\n");
+        return INVEN_STATE_ADD;
+
+    case 2:
+        printf("2. Display item !!!\n");
+        return INVEN_STATE_DISPLAY;
+
+    case 3:
+        printf("3. Remove item !!!\n");
+        return INVEN_STATE_REMOVE;
+
+    case 4:
+        printf("4. Update item !!!\n");
+        return INVEN_STATE_UPDATE;
+    default:
+        printf("Exit item !!\n");
+        return INVEN_STATE_EXIT;
+        break;
     }
 }
-int item_display(void)
+inventory_state_t item_display(void)
 {
     printf("Success\n");
     printf("Those item in store is:\n");
+    return INVEN_STATE_HOME;
 }
-int item_add(void)
+inventory_state_t item_add(void)
 {
     // static int item_index = 0;
     //     printf("Value of item index is: %d\n", item_index);
     //     int choose = 0;
-    //     printf("1. ADD ITEM\n");
-    //     printf("2. EXIT FUNCTION\n");
+    // printf("1. ADD ITEM\n");
+    // printf("2. EXIT FUNCTION\n");
+    printf("ok\n");
 
     //     while (scanf("%d", &choose) != 1 || choose > 2 || choose < 1)
     //     {
@@ -93,12 +90,17 @@ int item_add(void)
     //     printf("3)Price: %.2lf\n", items[item_index].price);
     //     printf("4)Quantity: %d\n", items[item_index].quantity);
     // display shouldnt place here -> one function just take a single purpose
+    return INVEN_STATE_HOME;
 }
-int item_update(void)
+inventory_state_t item_update(void)
 {
+    printf("ok\n");
+    return INVEN_STATE_HOME;
 }
-int item_remove(void)
+inventory_state_t item_remove(void)
 {
+    printf("ok\n");
+    return INVEN_STATE_HOME;
 }
 int item_current(void)
 {
