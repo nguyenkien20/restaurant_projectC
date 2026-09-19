@@ -6,6 +6,6 @@
 #define MAX_NAME 50
 #define MAX_TABLE 20
 #define MAX_CUSTOMER 100
-#define MAX_ITEM 50
+#define MAX_ITEM 100
 
 #endif
