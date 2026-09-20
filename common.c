@@ -2,19 +2,19 @@
 #include "common.h"
 
 // this function just using for integer input 
-int integer_input(const char *message, const int min_value, const int max_value)
+int integer_input(const char *message)
 {
     int value = 0;
-    int get_character = 0;
-    printf("%s", message);
-    while (scanf("%d", &value) != 1 || value < min_value || value > max_value)
+    int character_check = 0;
+    printf("%s\n", message);
+    while (scanf("%d", &value) != 1)
     {
-        while ((get_character = getchar()) != '\n' && get_character != EOF) // getchar return an int -> check if EOF or newline
+        while ((character_check = getchar()) != '\n' && character_check != EOF) // getchar return an int -> check if EOF or newline
             ;
-        printf("Please enter number from %d to %d: \n", min_value, max_value);
+        printf("Please enter again: \n");
         printf("%s", message);
     }
-    while ((get_character = getchar()) != '\n' && get_character != EOF) 
+    while ((character_check = getchar()) != '\n' && character_check != EOF) 
         ;
     return value;
 }
