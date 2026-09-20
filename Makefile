@@ -2,9 +2,9 @@ CFLAGS = -Wall -Wextra -g
 
 all: final_project
 
-final_project: main.o app_state.o admin.o customer.o inventory.o discount.o
+final_project: main.o app_state.o admin.o customer.o inventory.o discount.o common.o
 	@echo "Compile final_project file to .exe file"
-	gcc $(CFLAGS) main.o app_state.o admin.o customer.o inventory.o discount.o -o final_project
+	gcc $(CFLAGS) main.o app_state.o admin.o customer.o inventory.o discount.o common.o -o final_project
 
 main.o : main.c discount.h app_state.h inventory.h customer.h admin.h common.h config.h
 	@echo "Compile file main.c to object file"
@@ -29,7 +29,9 @@ inventory.o : inventory.c inventory.h
 discount.o : discount.c discount.h
 	@echo "Compile file discount.c to object file"
 	gcc $(CFLAGS) -c discount.c
-	
+common.o: common.c common.h
+	@echo "Compile file common.c to object file"
+	gcc $(CFLAGS) -c common.c
 clean: 
 	rm -f *.o final_project 
 
