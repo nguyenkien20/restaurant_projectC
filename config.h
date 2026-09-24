@@ -7,5 +7,6 @@
 #define MAX_TABLE 20
 #define MAX_CUSTOMER 100
 #define MAX_ITEM 100
+#define MAX_ADMIN_ACCOUNT 10
 
 #endif
