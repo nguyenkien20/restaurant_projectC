@@ -9,7 +9,6 @@
 #include "config.h"
 #include "common.h"
 
-// main flow of program
 int main()
 {
     state_t state = STATE_HOME; // 0
@@ -21,8 +20,38 @@ int main()
             state = main_board(); // state receive value from main_board -> 1
             break;
         case STATE_ADMIN:
-            state = adminPanel();
+            // nested FSM
             // if(state == STATE_ADMIN_MENU)
+            admin_panel_state_t adminPanel_state = ADMIN_PANEL_STATE_HOME;
+            int admin_panel_flag = 1;
+            while (admin_panel_flag)
+            {
+                switch (adminPanel_state)
+                {
+                case ADMIN_PANEL_STATE_HOME:
+                    adminPanel_state = adminPanel();
+                    break;
+                case ADMIN_PANEL_LOG_IN:
+                    adminPanel_state = admin_log_in();
+                    // if log in succesful -> return ADMIN_PANEL_LOG_IN_SUCCESS
+                    // if log in fail -> printf("cant login, please enter again") and return ADMIN_PANEL_LOG_IN;
+                    break;
+                case ADMIN_PANEL_LOG_IN_SUCCESS:
+                    admin_panel_flag = 0;
+                    state = STATE_ADMIN_MENU;
+                    break;
+                case ADMIN_PANEL_CREATE_ACCOUNT:
+                    adminPanel_state = admin_create_account();
+                    // if create account succesful -> return ADMIN_PANEL_LOG_IN
+                    // if create account fail -> printf("cant create account, please try again") and return ADMIN_PANEL_CREATE_ACCOUNT;
+                    break;
+                default:
+                    // back to main_board();
+                    admin_panel_flag = 0;
+                    state = STATE_HOME;
+                    break;
+                }
+            }
             break;
         case STATE_ADMIN_MENU:                            // state = STATE_ADMIN_MENU;
             admin_state_t admin_state = ADMIN_STATE_HOME; // after set STATE_ADMIN_MENU, we need to set admin_state_t admin_state = ADMIN_STATE_HOME;
@@ -49,6 +78,10 @@ int main()
                             break;
                         case INVEN_STATE_ADD:
                             item_state = item_add(); // 2 case // 1.add 2.exit
+                            if (item_state == (inventory_state_t)(-1))
+                            {
+                                return (-1); // end program (if fopen() return NULL)
+                            }
                             break;
                         case INVEN_STATE_DISPLAY:
                             item_state = item_display();
@@ -125,9 +158,9 @@ int main()
                     }
                     break;
                 case ADMIN_STATE_CHANGE_ACCOUNT:
-                    // admin_change_credentials();
-                    // admin_state = ADMIN_STATE_HOME;
-                    printf("\nYou are in change account manage by admin panel!\n");
+                    admin_state = admin_change_credentials();
+                    // if change succesful -> return ADMIN_STATE_HOME;
+                    // else, change fail -> return ADMIN_STATE_CHANGE_ACCOUNT
                     break;
                 default:
                     state = STATE_ADMIN;
@@ -139,6 +172,7 @@ int main()
             break;
         case STATE_CUSTOMER:
             state = customerPanel();
+            // nested FSM
             break;
         case STATE_CUSTOMER_MENU:
             printf("\nYou are in customer view for reserved table!\n");
