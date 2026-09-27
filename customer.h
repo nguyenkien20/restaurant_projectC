@@ -7,12 +7,12 @@
 
 typedef struct Customer
 {
-    char id[MAX_CHAR];
+    int id;
     char name[MAX_NAME];
     char phone_number[PHONENUMBER_LENG];
     int people_number;
     int is_reserved;
-    char table_id[MAX_TABLE];
+    int table_id;
 } customer_t;
 
 typedef enum state_customer // this for customer's management
