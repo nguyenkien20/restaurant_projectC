@@ -1,0 +1,5 @@
+
+----CUSTOMER ACCOUNT CREATE RECORD----
+1. NAME: khanhly
+2. PASSWORD: 123
+-----------------------------------
